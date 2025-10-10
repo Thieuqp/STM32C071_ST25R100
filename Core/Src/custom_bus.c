@@ -271,15 +271,15 @@ __weak HAL_StatusTypeDef MX_SPI1_Init(SPI_HandleTypeDef* hspi)
   hspi->Init.Direction = SPI_DIRECTION_2LINES;
   hspi->Init.DataSize = SPI_DATASIZE_8BIT;
   hspi->Init.CLKPolarity = SPI_POLARITY_LOW;
-  hspi->Init.CLKPhase = SPI_PHASE_1EDGE;
+  hspi->Init.CLKPhase = SPI_PHASE_2EDGE;
   hspi->Init.NSS = SPI_NSS_SOFT;
-  hspi->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
+  hspi->Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
   hspi->Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi->Init.TIMode = SPI_TIMODE_DISABLE;
   hspi->Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
   hspi->Init.CRCPolynomial = 7;
   hspi->Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
-  hspi->Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
+  hspi->Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
   if (HAL_SPI_Init(hspi) != HAL_OK)
   {
     ret = HAL_ERROR;
@@ -313,28 +313,25 @@ static void SPI1_MspInit(SPI_HandleTypeDef* spiHandle)
     */
     GPIO_InitStruct.Pin = BUS_SPI1_SCK_GPIO_PIN;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = BUS_SPI1_SCK_GPIO_AF;
     HAL_GPIO_Init(BUS_SPI1_SCK_GPIO_PORT, &GPIO_InitStruct);
 
     GPIO_InitStruct.Pin = BUS_SPI1_MISO_GPIO_PIN;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = BUS_SPI1_MISO_GPIO_AF;
     HAL_GPIO_Init(BUS_SPI1_MISO_GPIO_PORT, &GPIO_InitStruct);
 
     GPIO_InitStruct.Pin = BUS_SPI1_MOSI_GPIO_PIN;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = BUS_SPI1_MOSI_GPIO_AF;
     HAL_GPIO_Init(BUS_SPI1_MOSI_GPIO_PORT, &GPIO_InitStruct);
 
-    /* Peripheral interrupt init */
-    HAL_NVIC_SetPriority(SPI1_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(SPI1_IRQn);
   /* USER CODE BEGIN SPI1_MspInit 1 */
 
   /* USER CODE END SPI1_MspInit 1 */
@@ -358,9 +355,6 @@ static void SPI1_MspDeInit(SPI_HandleTypeDef* spiHandle)
     HAL_GPIO_DeInit(BUS_SPI1_MISO_GPIO_PORT, BUS_SPI1_MISO_GPIO_PIN);
 
     HAL_GPIO_DeInit(BUS_SPI1_MOSI_GPIO_PORT, BUS_SPI1_MOSI_GPIO_PIN);
-
-    /* Peripheral interrupt Deinit*/
-    HAL_NVIC_DisableIRQ(SPI1_IRQn);
 
   /* USER CODE BEGIN SPI1_MspDeInit 1 */
 

@@ -59,11 +59,9 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define ST25R_RST_Pin GPIO_PIN_2
-#define ST25R_RST_GPIO_Port GPIOF
-#define NFC_IRQ_Pin GPIO_PIN_0
-#define NFC_IRQ_GPIO_Port GPIOA
-#define NFC_IRQ_EXTI_IRQn EXTI0_1_IRQn
+#define ST25R_IRQ_Pin GPIO_PIN_0
+#define ST25R_IRQ_GPIO_Port GPIOA
+#define ST25R_IRQ_EXTI_IRQn EXTI0_1_IRQn
 #define LED1_Pin GPIO_PIN_1
 #define LED1_GPIO_Port GPIOA
 #define LED2_Pin GPIO_PIN_4
@@ -74,10 +72,12 @@ void Error_Handler(void);
 #define LED5_GPIO_Port GPIOB
 #define LED4_Pin GPIO_PIN_8
 #define LED4_GPIO_Port GPIOA
-#define LED6_Pin GPIO_PIN_9
-#define LED6_GPIO_Port GPIOA
-#define SPI1_NSS_Pin GPIO_PIN_6
-#define SPI1_NSS_GPIO_Port GPIOB
+#define ST25R_RST_Pin GPIO_PIN_9
+#define ST25R_RST_GPIO_Port GPIOA
+#define SPI1_NSS_Pin GPIO_PIN_15
+#define SPI1_NSS_GPIO_Port GPIOA
+#define LED6_Pin GPIO_PIN_4
+#define LED6_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

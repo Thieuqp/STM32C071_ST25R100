@@ -497,6 +497,9 @@ static void USART2_MspInit(UART_HandleTypeDef* uartHandle)
     GPIO_InitStruct.Alternate = BUS_USART2_RX_GPIO_AF;
     HAL_GPIO_Init(BUS_USART2_RX_GPIO_PORT, &GPIO_InitStruct);
 
+    /* Peripheral interrupt init */
+    HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(USART2_IRQn);
   /* USER CODE BEGIN USART2_MspInit 1 */
 
   /* USER CODE END USART2_MspInit 1 */
@@ -517,6 +520,9 @@ static void USART2_MspDeInit(UART_HandleTypeDef* uartHandle)
     HAL_GPIO_DeInit(BUS_USART2_TX_GPIO_PORT, BUS_USART2_TX_GPIO_PIN);
 
     HAL_GPIO_DeInit(BUS_USART2_RX_GPIO_PORT, BUS_USART2_RX_GPIO_PIN);
+
+    /* Peripheral interrupt Deinit*/
+    HAL_NVIC_DisableIRQ(USART2_IRQn);
 
   /* USER CODE BEGIN USART2_MspDeInit 1 */
 

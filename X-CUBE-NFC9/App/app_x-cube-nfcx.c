@@ -89,7 +89,7 @@ void MX_NFC9_PollingDemo_Init(void)
     BSP_COM_Init(COM1);
 
     USR_INT_LINE.Line = USR_INT_LINE_NUM;
-    USR_INT_LINE.RisingCallback = st25r200Isr;
+  //  USR_INT_LINE.PendingCallback = st25r200Isr;
     BSP_PB_Init(BUTTON_USER, BUTTON_MODE_GPIO);
 
     /* Configure interrupt callback */

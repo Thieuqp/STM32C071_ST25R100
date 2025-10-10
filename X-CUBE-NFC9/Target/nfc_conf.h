@@ -38,7 +38,7 @@ extern "C" {
 #define NFC09A1_LED3_PIN_CLK_ENABLE()     __HAL_RCC_GPIOB_CLK_ENABLE()
 #define NFC09A1_LED4_PIN_CLK_ENABLE()     __HAL_RCC_GPIOA_CLK_ENABLE()
 #define NFC09A1_LED5_PIN_CLK_ENABLE()     __HAL_RCC_GPIOB_CLK_ENABLE()
-#define NFC09A1_LED6_PIN_CLK_ENABLE()     __HAL_RCC_GPIOA_CLK_ENABLE()
+#define NFC09A1_LED6_PIN_CLK_ENABLE()     __HAL_RCC_GPIOB_CLK_ENABLE()
 #define NFC09A1_LED1_PIN                  GPIO_PIN_1
 #define NFC09A1_LED1_PIN_PORT             GPIOA
 #define NFC09A1_LED2_PIN                  GPIO_PIN_4
@@ -49,11 +49,11 @@ extern "C" {
 #define NFC09A1_LED4_PIN_PORT             GPIOA
 #define NFC09A1_LED5_PIN                  GPIO_PIN_10
 #define NFC09A1_LED5_PIN_PORT             GPIOB
-#define NFC09A1_LED6_PIN                  GPIO_PIN_9
-#define NFC09A1_LED6_PIN_PORT             GPIOA
+#define NFC09A1_LED6_PIN                  GPIO_PIN_4
+#define NFC09A1_LED6_PIN_PORT             GPIOB
 
-#define PLATFORM_LED_RX_PIN              GPIO_PIN_9
-#define PLATFORM_LED_RX_PORT             GPIOA
+#define PLATFORM_LED_RX_PIN              GPIO_PIN_4
+#define PLATFORM_LED_RX_PORT             GPIOB
 
 #define NFC09A1_ALLLED_GPIO_CLK_ENABLE() {NFC09A1_LED1_PIN_CLK_ENABLE();NFC09A1_LED2_PIN_CLK_ENABLE();NFC09A1_LED3_PIN_CLK_ENABLE();NFC09A1_LED4_PIN_CLK_ENABLE();NFC09A1_LED5_PIN_CLK_ENABLE();NFC09A1_LED6_PIN_CLK_ENABLE();}
 #define NFC09A1_NFCTAG_INSTANCE         (0)
@@ -84,8 +84,8 @@ extern "C" {
 #define PLATFORM_LED_AP2P_PIN        GPIO_PIN_10         /*!< GPIO pin used for LED AP2P */
 #define PLATFORM_LED_AP2P_PORT       GPIOB    /*!< GPIO port used for LED AP2P*/
 
-#define BUS_SPI1_NSS_GPIO_PIN           GPIO_PIN_6
-#define BUS_SPI1_NSS_GPIO_PORT          GPIOB
+#define BUS_SPI1_NSS_GPIO_PIN           GPIO_PIN_15
+#define BUS_SPI1_NSS_GPIO_PORT          GPIOA
 #define BUS_SPI1_IRQ_GPIO_PIN           GPIO_PIN_0
 #define BUS_SPI1_IRQ_GPIO_PORT          GPIOA
 
