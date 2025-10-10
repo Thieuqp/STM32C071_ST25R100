@@ -35,6 +35,7 @@ extern "C" {
 #include "logger.h"
 #include "RTE_Components.h"
 #include "nfc_conf.h"
+#include "demo.h"
 
 /*
 ******************************************************************************

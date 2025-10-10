@@ -30,6 +30,7 @@ extern "C" {
 #include "stm32c0xx_hal.h"
 
 #include "nfc_conf.h"
+#include "custom.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
@@ -58,6 +59,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define ST25R_RST_Pin GPIO_PIN_2
+#define ST25R_RST_GPIO_Port GPIOF
 #define NFC_IRQ_Pin GPIO_PIN_0
 #define NFC_IRQ_GPIO_Port GPIOA
 #define NFC_IRQ_EXTI_IRQn EXTI0_1_IRQn

@@ -139,6 +139,9 @@ int32_t BSP_NFC0XCOMM_Init(void);
 
 #define  COMM_HANDLE                                     hspi1
 
+void MX_NFC9_PollingTagDetect_Process(void);
+void MX_NFC9_PollingDemo_Init(void);
+
 void _Error_Handler(char * file, int line);
 
 #ifdef __cplusplus

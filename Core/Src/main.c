@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "gpio.h"
+#include "app_x-cube-nfcx.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -86,6 +87,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_X_CUBE_NFC9_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -96,6 +98,7 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
+  MX_X_CUBE_NFC9_Process();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

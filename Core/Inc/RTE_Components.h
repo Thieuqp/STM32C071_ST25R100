@@ -26,5 +26,6 @@
 #define USE_NFC09A1
 #define LIB_RFAL_DEFAULT
 #define USE_SPI
+#define NFC09A1_POLLING_TAG_DETECT
 
 #endif /* __RTE_COMPONENTS_H__ */

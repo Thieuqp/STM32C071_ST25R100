@@ -12,7 +12,9 @@ set(MX_Defines_Syms
 # STM32CubeMX generated include paths
 set(MX_Include_Dirs
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Inc
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../X-CUBE-NFC9/App
     ${CMAKE_CURRENT_SOURCE_DIR}/../../X-CUBE-NFC9/Target
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/BSP/custom
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/STM32C0xx_HAL_Driver/Inc
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/STM32C0xx_HAL_Driver/Inc/Legacy
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/CMSIS/Device/ST/STM32C0xx/Include
@@ -26,8 +28,12 @@ set(MX_Include_Dirs
 # STM32CubeMX generated application sources
 set(MX_Application_Src
     ${CMAKE_CURRENT_SOURCE_DIR}/../../X-CUBE-NFC9/Target/nfc_conf.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../X-CUBE-NFC9/Target/demo_polling.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../X-CUBE-NFC9/Target/logger.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../X-CUBE-NFC9/App/app_x-cube-nfcx.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/main.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/gpio.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/bsp.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/custom_bus.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/stm32c0xx_it.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Core/Src/stm32c0xx_hal_msp.c
@@ -53,6 +59,9 @@ set(STM32_Drivers_Src
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/STM32C0xx_HAL_Driver/Src/stm32c0xx_hal_pwr_ex.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/STM32C0xx_HAL_Driver/Src/stm32c0xx_hal_cortex.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/STM32C0xx_HAL_Driver/Src/stm32c0xx_hal_exti.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/STM32C0xx_HAL_Driver/Src/stm32c0xx_hal_uart.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/STM32C0xx_HAL_Driver/Src/stm32c0xx_hal_uart_ex.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/BSP/custom/custom.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/BSP/NFC09A1/nfc09a1.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/BSP/Components/st25r200/rfal_rfst25r200.c
     ${CMAKE_CURRENT_SOURCE_DIR}/../../Drivers/BSP/Components/st25r200/st25r200.c
