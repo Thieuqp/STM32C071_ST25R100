@@ -28,6 +28,7 @@ There are few fixes that make generated code work on this platform:
 1) Fix SPI HAL to handle 8-bit transfer instead of 16-bit (Drivers/STM32C0xx_HAL_Driver/Src/stm32c0xx_hal_spi.c), to resolve issue with 16-bit alignment when transfer/read data of cards
 2) Disable adding FIFO to UART2 in `Drivers/BSP/custom/custom.c` as it is not available on STM32C071 UART2
 3) Remove USR_BTN handling - as it is always at low level. this could be just a workaround, however we can enable again with more testing in (X-CUBE-NFC9/Target/demo_polling.c)
+4) Fix wrongly generated code in `MX_NFC9_PollingDemo_Init()`: `USR_INT_LINE.PendingCallback = st25r200Isr;`
 
 ## Usage
 
