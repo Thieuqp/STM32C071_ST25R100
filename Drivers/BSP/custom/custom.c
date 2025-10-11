@@ -310,20 +310,20 @@ __weak HAL_StatusTypeDef MX_USART2_UART_Init(UART_HandleTypeDef* huart)
     ret = HAL_ERROR;
   }
 
-  if (HAL_UARTEx_SetTxFifoThreshold(huart, UART_TXFIFO_THRESHOLD_1_8) != HAL_OK)
-  {
-    ret = HAL_ERROR;
-  }
+  // if (HAL_UARTEx_SetTxFifoThreshold(huart, UART_TXFIFO_THRESHOLD_7_8) != HAL_OK)
+  // {
+  //   ret = HAL_ERROR;
+  // }
 
-  if (HAL_UARTEx_SetRxFifoThreshold(huart, UART_RXFIFO_THRESHOLD_1_8) != HAL_OK)
-  {
-    ret = HAL_ERROR;
-  }
+  // if (HAL_UARTEx_SetRxFifoThreshold(huart, UART_RXFIFO_THRESHOLD_7_8) != HAL_OK)
+  // {
+  //   ret = HAL_ERROR;
+  // }
 
-  if (HAL_UARTEx_DisableFifoMode(huart) != HAL_OK)
-  {
-    ret = HAL_ERROR;
-  }
+  // if (HAL_UARTEx_DisableFifoMode(huart) != HAL_OK)
+  // {
+  //   ret = HAL_ERROR;
+  // }
 
   return ret;
 }

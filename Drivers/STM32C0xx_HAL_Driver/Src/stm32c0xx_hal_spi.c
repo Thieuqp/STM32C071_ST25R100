@@ -1289,7 +1289,7 @@ HAL_StatusTypeDef HAL_SPI_TransmitReceive(SPI_HandleTypeDef *hspi, const uint8_t
   /* Variable used to alternate Rx and Tx during transfer */
   uint32_t             txallowed = 1U;
 
-  if ((hspi->Init.DataSize > SPI_DATASIZE_8BIT) || ((hspi->Init.DataSize <= SPI_DATASIZE_8BIT) && (Size > 1U)))
+  if (hspi->Init.DataSize > SPI_DATASIZE_8BIT)
   {
     /* in this case, 16-bit access is performed on Data
        So, check Data is 16-bit aligned address */
@@ -1355,7 +1355,7 @@ HAL_StatusTypeDef HAL_SPI_TransmitReceive(SPI_HandleTypeDef *hspi, const uint8_t
 #endif /* USE_SPI_CRC */
 
   /* Set the Rx Fifo threshold */
-  if ((hspi->Init.DataSize > SPI_DATASIZE_8BIT) || (initial_RxXferCount > 1U))
+  if (hspi->Init.DataSize > SPI_DATASIZE_8BIT)
   {
     /* Set fiforxthreshold according the reception data length: 16bit */
     CLEAR_BIT(hspi->Instance->CR2, SPI_RXFIFO_THRESHOLD);
@@ -1443,49 +1443,31 @@ HAL_StatusTypeDef HAL_SPI_TransmitReceive(SPI_HandleTypeDef *hspi, const uint8_t
   {
     if ((hspi->Init.Mode == SPI_MODE_SLAVE) || (initial_TxXferCount == 0x01U))
     {
-      if (hspi->TxXferCount > 1U)
-      {
-        hspi->Instance->DR = *((const uint16_t *)hspi->pTxBuffPtr);
-        hspi->pTxBuffPtr += sizeof(uint16_t);
-        hspi->TxXferCount -= 2U;
-      }
-      else
-      {
-        *(__IO uint8_t *)&hspi->Instance->DR = *((const uint8_t *)hspi->pTxBuffPtr);
-        hspi->pTxBuffPtr++;
-        hspi->TxXferCount--;
+      *(__IO uint8_t *)&hspi->Instance->DR = *((const uint8_t *)hspi->pTxBuffPtr);
+      hspi->pTxBuffPtr++;
+      hspi->TxXferCount--;
 
 #if (USE_SPI_CRC != 0U)
-        /* Enable CRC Transmission */
-        if ((hspi->TxXferCount == 0U) && (hspi->Init.CRCCalculation == SPI_CRCCALCULATION_ENABLE))
+      /* Enable CRC Transmission */
+      if ((hspi->TxXferCount == 0U) && (hspi->Init.CRCCalculation == SPI_CRCCALCULATION_ENABLE))
+      {
+        /* Set NSS Soft to received correctly the CRC on slave mode with NSS pulse activated */
+        if ((READ_BIT(spi_cr1, SPI_CR1_MSTR) == 0U) && (READ_BIT(spi_cr2, SPI_CR2_NSSP) == SPI_CR2_NSSP))
         {
-          /* Set NSS Soft to received correctly the CRC on slave mode with NSS pulse activated */
-          if ((READ_BIT(spi_cr1, SPI_CR1_MSTR) == 0U) && (READ_BIT(spi_cr2, SPI_CR2_NSSP) == SPI_CR2_NSSP))
-          {
-            SET_BIT(hspi->Instance->CR1, SPI_CR1_SSM);
-          }
-          SET_BIT(hspi->Instance->CR1, SPI_CR1_CRCNEXT);
+          SET_BIT(hspi->Instance->CR1, SPI_CR1_SSM);
         }
-#endif /* USE_SPI_CRC */
+        SET_BIT(hspi->Instance->CR1, SPI_CR1_CRCNEXT);
       }
+#endif /* USE_SPI_CRC */
     }
     while ((hspi->TxXferCount > 0U) || (hspi->RxXferCount > 0U))
     {
       /* Check TXE flag */
       if ((__HAL_SPI_GET_FLAG(hspi, SPI_FLAG_TXE)) && (hspi->TxXferCount > 0U) && (txallowed == 1U))
       {
-        if (hspi->TxXferCount > 1U)
-        {
-          hspi->Instance->DR = *((const uint16_t *)hspi->pTxBuffPtr);
-          hspi->pTxBuffPtr += sizeof(uint16_t);
-          hspi->TxXferCount -= 2U;
-        }
-        else
-        {
-          *(__IO uint8_t *)&hspi->Instance->DR = *((const uint8_t *)hspi->pTxBuffPtr);
-          hspi->pTxBuffPtr++;
-          hspi->TxXferCount--;
-        }
+        *(__IO uint8_t *)&hspi->Instance->DR = *((const uint8_t *)hspi->pTxBuffPtr);
+        hspi->pTxBuffPtr++;
+        hspi->TxXferCount--;
         /* Next Data is a reception (Rx). Tx not allowed */
         txallowed = 0U;
 
@@ -1506,23 +1488,9 @@ HAL_StatusTypeDef HAL_SPI_TransmitReceive(SPI_HandleTypeDef *hspi, const uint8_t
       /* Wait until RXNE flag is reset */
       if ((__HAL_SPI_GET_FLAG(hspi, SPI_FLAG_RXNE)) && (hspi->RxXferCount > 0U))
       {
-        if (hspi->RxXferCount > 1U)
-        {
-          *((uint16_t *)hspi->pRxBuffPtr) = (uint16_t)hspi->Instance->DR;
-          hspi->pRxBuffPtr += sizeof(uint16_t);
-          hspi->RxXferCount -= 2U;
-          if (hspi->RxXferCount <= 1U)
-          {
-            /* Set RX Fifo threshold before to switch on 8 bit data size */
-            SET_BIT(hspi->Instance->CR2, SPI_RXFIFO_THRESHOLD);
-          }
-        }
-        else
-        {
-          (*(uint8_t *)hspi->pRxBuffPtr) = *(__IO uint8_t *)&hspi->Instance->DR;
-          hspi->pRxBuffPtr++;
-          hspi->RxXferCount--;
-        }
+        (*(uint8_t *)hspi->pRxBuffPtr) = *(__IO uint8_t *)&hspi->Instance->DR;
+        hspi->pRxBuffPtr++;
+        hspi->RxXferCount--;
         /* Next Data is a Transmission (Tx). Tx is allowed */
         txallowed = 1U;
       }
